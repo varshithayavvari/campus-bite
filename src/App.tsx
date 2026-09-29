@@ -19,6 +19,7 @@ import { Footer } from './components/Footer';
 import { MobileBottomNav } from './components/MobileBottomNav';
 import { BackToTop } from './components/BackToTop';
 import { ToastContainer } from './components/Toast';
+import { ChatBox } from './components/ChatBox';
 import { Sparkles, Flame, SearchX } from 'lucide-react';
 
 export default function App() {
@@ -39,6 +40,7 @@ export default function App() {
   const [ordersModalOpen, setOrdersModalOpen] = useState(false);
   const [favoritesModalOpen, setFavoritesModalOpen] = useState(false);
   const [profileModalOpen, setProfileModalOpen] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
   const [quickViewItem, setQuickViewItem] = useState<MenuItem | null>(null);
   const [trackedOrder, setTrackedOrder] = useState<Order | null>(null);
 
@@ -397,6 +399,7 @@ export default function App() {
         onOpenProfile={() => setProfileModalOpen(true)}
         onToggleTheme={toggleTheme}
         onFocusSearch={handleFocusSearch}
+        onOpenChat={() => setChatOpen(true)}
       />
 
       {/* Main Content Area */}
@@ -616,6 +619,14 @@ export default function App() {
         onAddToCart={handleAddToCart}
         onUpdateQuantity={handleUpdateQuantity}
         onToggleFavorite={handleToggleFavorite}
+      />
+
+      {/* Canteen AI Chat Assistant (n8n Webhook Connected) */}
+      <ChatBox
+        isOpen={chatOpen}
+        onClose={() => setChatOpen(false)}
+        onOpen={() => setChatOpen(true)}
+        initialWebhookUrl="https://varshitha16.app.n8n.cloud/webhook/5add194e-cd98-4a61-86e9-f204cb66b461/chat"
       />
 
     </div>
